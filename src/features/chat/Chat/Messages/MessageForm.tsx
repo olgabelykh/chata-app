@@ -2,6 +2,7 @@ import { type FormEvent, useState } from "react"
 import { useSendMessageMutation } from "../../chatsApiSlice"
 import { Button, Stack, TextField } from "@mui/material"
 
+import { useWebSocketContext, STATES } from "../../../../app/wsApi"
 export type MessageFormProps = {
   chatId: string
   userId: string
@@ -17,6 +18,7 @@ export const MessageForm = ({
 }: MessageFormProps) => {
   const [value, setValue] = useState("")
   const [send, { isLoading }] = useSendMessageMutation()
+  const { state } = useWebSocketContext()
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -30,6 +32,7 @@ export const MessageForm = ({
       })
     onSubmit?.()
   }
+  const disabled = isLoading || !value.trim() || state !== STATES.open
 
   return (
     <form onSubmit={handleSubmit}>
@@ -43,7 +46,7 @@ export const MessageForm = ({
             setValue(e.target.value)
           }}
         />
-        <Button type="submit" disabled={isLoading || !value.trim()}>
+        <Button type="submit" disabled={disabled}>
           send
         </Button>
       </Stack>

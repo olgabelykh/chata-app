@@ -9,4 +9,4 @@ export type OnMessageCallback = (
 export type OnStateCallback = () => void
 export type OnErrorCallback = () => void
 
-export type States = (typeof STATES)[keyof typeof STATES]
+export type State = (typeof STATES)[keyof typeof STATES]

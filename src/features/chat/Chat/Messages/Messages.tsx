@@ -41,6 +41,7 @@ export const Messages = ({ chatId, userId, userName }: MessagesProps) => {
             <Stack sx={{ minHeight: 1 }} p={2} gap={1}>
               {data.map(message => (
                 <Message
+                  key={message.id}
                   message={message}
                   isUserMessage={message.userId === userId}
                 />
