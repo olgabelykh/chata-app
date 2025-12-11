@@ -1,3 +1,16 @@
+To start the http/ws　API server:
+
+install deps
+
+```bash
+cd server
+npm install
+```
+
+```bash
+npm run server
+```
+
 # vite-template-redux
 
 Uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/)
@@ -19,6 +32,7 @@ npx tiged reduxjs/redux-templates/packages/vite-template-redux my-app
 - `build` - build for production
 - `preview` - locally preview production build
 - `test` - launch test runner
+- `server` - start api server
 
 ## Inspiration
 
