@@ -2,7 +2,7 @@ import { useImperativeHandle, useLayoutEffect, useRef } from "react"
 import { useDebounceCallback, useResizeObserver } from "usehooks-ts"
 import { Box } from "@mui/material"
 
-import { ScrollableRefType } from "./types"
+import { type ScrollableRefType } from "./types"
 
 const styles = {
   container: {

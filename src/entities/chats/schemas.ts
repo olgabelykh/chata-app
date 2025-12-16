@@ -11,17 +11,4 @@ export const MessageSchema = z.object({
   userId: z.string(),
   userName: z.string(),
   content: z.string(),
-  views: z.array(
-    z.object({
-      userId: z.string(),
-      userName: z.string(),
-    }),
-  ),
-})
-
-export const NewMessageSchema = MessageSchema.pick({
-  userId: true,
-  userName: true,
-  chatId: true,
-  content: true,
 })

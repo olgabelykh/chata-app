@@ -34,23 +34,23 @@ export const Users = () => {
     return (
       <Stack
         p={4}
-        alignItems={"center"}
-        justifyContent={"center"}
+        alignItems="center"
+        justifyContent="center"
         height={1}
-        overflow={"hidden"}
+        overflow="hidden"
         gap={4}
       >
         <Typography variant="h6" component="div">
           Выберите пользователя
         </Typography>
         <Stack
-          justifyContent={"center"}
-          alignItems={"center"}
-          flexDirection={"row"}
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="row"
           p={4}
           gap={2}
-          overflow={"auto"}
-          flexWrap={"wrap"}
+          overflow="auto"
+          flexWrap="wrap"
         >
           {data.map(user => (
             <UserCard

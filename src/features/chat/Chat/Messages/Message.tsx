@@ -18,7 +18,7 @@ export const Message = ({
     <Typography p={0} variant="body1">
       {message.content}
     </Typography>
-    <Typography textAlign={"end"} p={0} variant="body2">
+    <Typography textAlign="end" p={0} variant="body2">
       {message.userName}
     </Typography>
   </Stack>

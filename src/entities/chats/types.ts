@@ -1,9 +1,7 @@
 import type * as z from "zod"
 
-import type { ChatSchema, MessageSchema, NewMessageSchema } from "./schemas"
+import type { ChatSchema, MessageSchema } from "./schemas"
 
 export type Chat = z.infer<typeof ChatSchema>
 
 export type Message = z.infer<typeof MessageSchema>
-
-export type NewMessage = z.infer<typeof NewMessageSchema>

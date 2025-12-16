@@ -1,7 +1,7 @@
 import { WSMessageSchema } from "./schemas"
 import { MESSAGE_TYPES } from "./constants"
 
-import type { NewMessage } from "../../entities/chats"
+import type { Message } from "../../entities/chats"
 
 import type {
   OnErrorCallback,
@@ -148,26 +148,29 @@ export class WSApi {
     }
   }
 
-  sendMessage(message: NewMessage): boolean {
-    if (this.ws == null || this.ws.readyState !== WebSocket.OPEN) {
-      console.info("Невозможно отправить соообщение. Соединение не открыто. .")
+  sendMessage(message: Message): Promise<Message> {
+    return new Promise((resolve, reject) => {
+      if (this.ws == null || this.ws.readyState !== WebSocket.OPEN) {
+        const errorMessage =
+          "Невозможно отправить соообщение. Соединение не открыто."
+        reject(new Error(errorMessage))
+        return
+      }
 
-      return false
-    }
+      try {
+        const stringifiedMessage = JSON.stringify({
+          type: MESSAGE_TYPES.new,
+          payload: message,
+        })
 
-    try {
-      const stringifiedMessage = JSON.stringify({
-        type: MESSAGE_TYPES.new,
-        payload: message,
-      })
-
-      this.ws.send(stringifiedMessage)
-      return true
-    } catch (error) {
-      const errorMessage = "Ошибка при отправке сообщения"
-      console.error(errorMessage, "\n", error)
-      return false
-    }
+        this.ws.send(stringifiedMessage)
+        resolve(message)
+      } catch (error) {
+        const errorMessage = "Ошибка при отправке сообщения"
+        console.error(errorMessage, "\n", error)
+        reject(new Error(errorMessage))
+      }
+    })
   }
 }
 

@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { v4 as uuid } from "uuid"
 
 import { wsApi } from "../../app/wsApi"
-import type { Message, NewMessage, Chat } from "../../entities/chats"
+import type { Message, Chat } from "../../entities/chats"
 
 const CHAT_URL = "http://localhost:3030/"
 
@@ -44,15 +43,26 @@ export const chatsApiSlice = createApi({
         }
       },
     }),
-    sendMessage: build.mutation<Partial<Message> | string, NewMessage>({
-      queryFn(message: NewMessage) {
-        const success = wsApi.sendMessage(message)
-
-        if (success) {
-          return { data: { ...message, id: uuid(), views: [] } }
+    sendMessage: build.mutation<Message, Message>({
+      async queryFn(message: Message) {
+        const data = await wsApi.sendMessage(message)
+        return { data }
+      },
+      async onQueryStarted(patch, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          chatsApiSlice.util.updateQueryData(
+            "getMessages",
+            patch.chatId,
+            draft => {
+              draft.push(patch)
+            },
+          ),
+        )
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
         }
-
-        return { data: "erorr" }
       },
     }),
   }),

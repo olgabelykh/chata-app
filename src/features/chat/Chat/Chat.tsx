@@ -23,7 +23,7 @@ export const Chat = ({ userName, userId }: ChatProps): JSX.Element => {
 
   return (
     <WebSocketContextProvider>
-      <Stack width={1} height={1} flexDirection={"row"}>
+      <Stack width={1} height={1} flexDirection="row">
         <Stack height={1}>
           <UserInfo name={userName} />
           <Divider />

@@ -7,7 +7,7 @@ export const Container = ({
   children: ReactNode
 }): JSX.Element => {
   return (
-    <Stack height={1} p={2} alignItems={"center"} justifyContent={"center"}>
+    <Stack height={1} p={2} alignItems="center" justifyContent="center">
       {children}
     </Stack>
   )

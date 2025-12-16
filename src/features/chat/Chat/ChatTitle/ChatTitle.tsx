@@ -23,15 +23,9 @@ export const ChatTitle = () => {
       minHeight={64}
       flexDirection="row"
       justifyContent="space-between"
-      alignItems={"center"}
+      alignItems="center"
     >
-      <Stack
-        p={2}
-        height={1}
-        flexDirection={"row"}
-        gap={1}
-        alignItems={"center"}
-      >
+      <Stack p={2} height={1} flexDirection="row" gap={1} alignItems="center">
         <ChatName name={selectedChat?.name} />
         <ConnectionState state={state} />
       </Stack>
